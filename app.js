@@ -1,5 +1,6 @@
 var program = require('commander');
 var path = require('path');
+var SniptClient = require('./snipt-client').SniptClient;
 var config = require(path.join(__dirname, 'config', 'config.json'));
 var version = require(path.join(__dirname, 'package.json')).version;
 
@@ -28,3 +29,8 @@ program
 	});
 
 program.parse(process.argv);
+
+var username = program.username || config.username || config.defaults.username;
+var apiKey = program.apiKey || config.apiKey || config.defaults.apiKey;
+var client = new SniptClient(username, apiKey);
+client.test();
