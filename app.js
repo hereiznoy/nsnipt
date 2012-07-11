@@ -1,16 +1,8 @@
 var program = require('commander');
 var path = require('path');
 var SniptClient = require('./snipt-client').SniptClient;
-var config = require(path.join(__dirname, 'config', 'config.json'));
+var config = require('./config/config.js');
 var version = require(path.join(__dirname, 'package.json')).version;
-
-config.defaults = {
-	"apiKey": "",
-	"username": "",
-	"backup": {
-		"backupDir": "."
-	}
-};
 
 program
 	.version(version)
@@ -22,15 +14,11 @@ program
 	.description('do a full backup of all your snippets')
 	.option('-d, --backup-dir [dir]', 'directory to use for backup')
 	.action(function(options) {
-		var backupDir = options.backupDir 
-			|| config.backup.backupDir
-			|| config.defaults.backupDir;
-		console.log('Doing a backup to %s', backupDir);
+		var username = options.parent.username || config.username,
+			apiKey = options.parent.apiKey || config.apiKey,
+			backupDir = options.backupDir || config.backup.backupDir,
+			client = new SniptClient(username, apiKey);
+		client.backup(backupDir);
 	});
 
 program.parse(process.argv);
-
-var username = program.username || config.username || config.defaults.username;
-var apiKey = program.apiKey || config.apiKey || config.defaults.apiKey;
-var client = new SniptClient(username, apiKey);
-client.test();
