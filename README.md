@@ -50,3 +50,7 @@ Any optional options can be left off (such as the __-d__ backup directory locati
 Again, currently the only operational command the client supports is _backup_.
 
 > nsnipt backup -d /path/to/backup/dir
+
+To get help:
+
+> nsnipt -h
