@@ -1,12 +1,19 @@
 {
   "description": "Node CLI that interacts with Snipt.net",
   "version": "0.0.1",
-  "private": true,
   "dependencies": {
     "commander": "1.0.0",
     "path": "0.4.9"
   },
+  "engines": { "node": "*" },
+  "preferGlobal": "true",
+  "main": "app.js",
+  "bin": { "nsnipt": "app.js" },
   "name": "nsnipt",
   "author": "hereiznoy",
-  "homepage": "https://github.com/hereiznoy/nsnipt"
+  "homepage": "https://github.com/hereiznoy/nsnipt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hereiznoy/nsnipt"
+  }
 }
